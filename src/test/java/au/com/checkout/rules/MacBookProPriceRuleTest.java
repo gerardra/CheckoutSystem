@@ -1,13 +1,14 @@
 package au.com.checkout.rules;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import au.com.checkout.Checkout;
 import au.com.checkout.domain.CheckoutItem;
 import au.com.checkout.domain.CheckoutItemType;
 
@@ -15,43 +16,66 @@ import au.com.checkout.domain.CheckoutItemType;
 
 public class MacBookProPriceRuleTest {
 
-private Map<CheckoutItem, Integer> checkoutItems;
+	private Checkout checkout;
+	
+	private List<PriceRule> priceRules = new ArrayList<PriceRule>();
 	
 	@Before
 	public void setUp(){
-		checkoutItems = new HashMap<CheckoutItem, Integer>();
+		priceRules.add(new VgaPriceRule()); 
+		priceRules.add(new IpadPriceRule()); 
+		priceRules.add(new AppleTvPriceRule()); 
+		checkout = new Checkout(priceRules);
 	}
 
 	@After
 	public void tearDown() {
-		checkoutItems = null;
+		priceRules.clear();
 	}
 	
 	@Test
-	public void buy0IMacBookPro() {
+	public void buyOneIMacBookPro() {
 		CheckoutItem checkoutItem = CheckoutItem.checkoutItem(CheckoutItemType.MPB, 1399.99);
-		checkoutItems.put(checkoutItem, 0);
-		PriceRule priceRule = new MacBookProPriceRule();
-		double totalPrice = priceRule.applyBusinessRules(checkoutItems);
-		Assert.assertTrue(checkoutItem.getItemPrice() * 0 == totalPrice);
+		checkout.scanCheckoutItem(checkoutItem);
+		Assert.assertTrue(1399.99== checkout.calculateTotal());
 	}
 
 	@Test
 	public void buy5IMacBookPro() {
-		CheckoutItem checkoutItem = CheckoutItem.checkoutItem(CheckoutItemType.MPB, 1399.99);
-		checkoutItems.put(checkoutItem, 5);
-		PriceRule priceRule = new MacBookProPriceRule();
-		double totalPrice = priceRule.applyBusinessRules(checkoutItems);
-		Assert.assertTrue(checkoutItem.getItemPrice() * 5 == totalPrice);
+		CheckoutItem checkoutItem1 = CheckoutItem.checkoutItem(CheckoutItemType.MPB, 1399.99);
+		CheckoutItem checkoutItem2 = CheckoutItem.checkoutItem(CheckoutItemType.MPB, 1399.99);
+		CheckoutItem checkoutItem3 = CheckoutItem.checkoutItem(CheckoutItemType.MPB, 1399.99);
+		CheckoutItem checkoutItem4 = CheckoutItem.checkoutItem(CheckoutItemType.MPB, 1399.99);
+		CheckoutItem checkoutItem5 = CheckoutItem.checkoutItem(CheckoutItemType.MPB, 1399.99);
+		checkout.scanCheckoutItem(checkoutItem1);
+		checkout.scanCheckoutItem(checkoutItem2);
+		checkout.scanCheckoutItem(checkoutItem3);
+		checkout.scanCheckoutItem(checkoutItem4);
+		checkout.scanCheckoutItem(checkoutItem5);
+		
+		Assert.assertTrue(6999.95 == checkout.calculateTotal());
 	}
 
 	@Test
 	public void buy8IMacBookPro() {
-		CheckoutItem checkoutItem = CheckoutItem.checkoutItem(CheckoutItemType.MPB, 1399.99);
-		checkoutItems.put(checkoutItem, 8);
-		PriceRule priceRule = new MacBookProPriceRule();
-		double totalPrice = priceRule.applyBusinessRules(checkoutItems);
-		Assert.assertTrue(checkoutItem.getItemPrice() * 8 == totalPrice);
+		CheckoutItem checkoutItem1 = CheckoutItem.checkoutItem(CheckoutItemType.MPB, 1399.99);
+		CheckoutItem checkoutItem2 = CheckoutItem.checkoutItem(CheckoutItemType.MPB, 1399.99);
+		CheckoutItem checkoutItem3 = CheckoutItem.checkoutItem(CheckoutItemType.MPB, 1399.99);
+		CheckoutItem checkoutItem4 = CheckoutItem.checkoutItem(CheckoutItemType.MPB, 1399.99);
+		CheckoutItem checkoutItem5 = CheckoutItem.checkoutItem(CheckoutItemType.MPB, 1399.99);
+		CheckoutItem checkoutItem6 = CheckoutItem.checkoutItem(CheckoutItemType.MPB, 1399.99);
+		CheckoutItem checkoutItem7 = CheckoutItem.checkoutItem(CheckoutItemType.MPB, 1399.99);
+		CheckoutItem checkoutItem8 = CheckoutItem.checkoutItem(CheckoutItemType.MPB, 1399.99);
+		
+		checkout.scanCheckoutItem(checkoutItem1);
+		checkout.scanCheckoutItem(checkoutItem2);
+		checkout.scanCheckoutItem(checkoutItem3);
+		checkout.scanCheckoutItem(checkoutItem4);
+		checkout.scanCheckoutItem(checkoutItem5);
+		checkout.scanCheckoutItem(checkoutItem6);
+		checkout.scanCheckoutItem(checkoutItem7);
+		checkout.scanCheckoutItem(checkoutItem8);
+		Assert.assertTrue(11199.92 == checkout.calculateTotal());
 	}
 
 }

@@ -29,7 +29,7 @@ private Map<CheckoutItem, Integer> checkoutItems;
 	
 	@Test
 	public void buy0IPadest() {
-		CheckoutItem checkoutItem = CheckoutItem.checkoutItemWithDiscount(CheckoutItemType.IPD, 549.99, 499.99);
+		CheckoutItem checkoutItem = CheckoutItem.checkoutItemWithDiscountAndDeal(CheckoutItemType.IPD, 549.99, 499.99);
 		checkoutItems.put(checkoutItem, 0);
 		PriceRule priceRule = new IpadPriceRule();
 		double totalPrice = priceRule.applyBusinessRules(checkoutItems);
@@ -38,7 +38,7 @@ private Map<CheckoutItem, Integer> checkoutItems;
 
 	@Test
 	public void buy3IPadest() {
-		CheckoutItem checkoutItem = CheckoutItem.checkoutItemWithDiscount(CheckoutItemType.IPD, 549.99, 499.99);
+		CheckoutItem checkoutItem = CheckoutItem.checkoutItemWithDiscountAndDeal(CheckoutItemType.IPD, 549.99, 499.99);
 		checkoutItems.put(checkoutItem, 3);
 		PriceRule priceRule = new IpadPriceRule();
 		double totalPrice = priceRule.applyBusinessRules(checkoutItems);
@@ -47,7 +47,7 @@ private Map<CheckoutItem, Integer> checkoutItems;
 
 	@Test
 	public void buy5IPadest() {
-		CheckoutItem checkoutItem = CheckoutItem.checkoutItemWithDiscount(CheckoutItemType.IPD, 549.99, 499.99);
+		CheckoutItem checkoutItem = CheckoutItem.checkoutItemWithDiscountAndDeal(CheckoutItemType.IPD, 549.99, 499.99);
 		checkoutItems.put(checkoutItem, 5);
 		PriceRule priceRule = new IpadPriceRule();
 		double totalPrice = priceRule.applyBusinessRules(checkoutItems);
