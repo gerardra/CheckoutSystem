@@ -1,7 +1,7 @@
 package au.com.checkout.domain;
 
 public enum CheckoutItemType {
-	IPD("ipd", "Super iPad" ), MPB("mpb", "MacBook Pro"), ATV("atv", "Apple TV"), VGA("vga", "VGA adapter");
+	IPD("ipd", "Super iPad" ), MPB("mpb", "MacBook Pro"), ATV("atv", "Apple TV"), VGA("vga", "VGA adapter"), IPH("iph", "iPhone");
 	
 	private String checkoutItemCode;
 	private String checkoutItemName;

@@ -17,17 +17,19 @@ public class Checkout {
 		 this.priceRules = priceRules;
 	}
 
-	public double scanCheckoutItemAndCalculateTotal(final CheckoutItem checkoutItem) {
+	public void scanCheckoutItem(final CheckoutItem checkoutItem) {
 		checkoutItems.merge(checkoutItem, 1, Integer::sum);
-		return calculateTotal();
 	}
 	
 	public double calculateTotal() {
-		double totalAmount = 0.0;
+		double totalAmountWithDeal = checkoutItems.entrySet().stream()
+				.filter(checkoutItem -> !checkoutItem.getKey().isDealOn())
+				.mapToDouble(item -> item.getKey().getItemPrice() * item.getValue())
+				.sum();
 		for (PriceRule priceRule : priceRules) {
-			totalAmount = totalAmount + priceRule.applyBusinessRules(checkoutItems);
+			totalAmountWithDeal = totalAmountWithDeal + priceRule.applyBusinessRules(checkoutItems);
 		}
-		return totalAmount;
+		return totalAmountWithDeal;
 	}
 	
 }

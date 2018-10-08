@@ -10,19 +10,26 @@ public class CheckoutItem {
 	
 	private final double discountPrice;
 	
-	private CheckoutItem (final CheckoutItemType checkoutItemCode, final double itemPrice, final double discountPrice) {
+	private boolean isDealOn = false;
+	
+	private CheckoutItem (final CheckoutItemType checkoutItemCode, final double itemPrice, final double discountPrice, final boolean isDealOn) {
 		this.itemSku = checkoutItemCode;
 		this.itemPrice = itemPrice;
 		this.itemName = checkoutItemCode.getCheckoutItemName();
 		this.discountPrice = discountPrice;
+		this.isDealOn = isDealOn;
 	}
 
-	public static CheckoutItem checkoutItemWithDiscount(final CheckoutItemType checkoutItemCode, final double itemPrice, final double discountPrice) {
-		return new CheckoutItem(checkoutItemCode, itemPrice, discountPrice);
+	public static CheckoutItem checkoutItemWithDiscountAndDeal(final CheckoutItemType checkoutItemCode, final double itemPrice, final double discountPrice) {
+		return new CheckoutItem(checkoutItemCode, itemPrice, discountPrice, true);
 	}
 
 	public static CheckoutItem checkoutItem(final CheckoutItemType checkoutItemCode, final double itemPrice) {
-		return new CheckoutItem(checkoutItemCode, itemPrice, 0.0);
+		return new CheckoutItem(checkoutItemCode, itemPrice, 0.0, false);
+	}
+	
+	public static CheckoutItem checkoutItemWithDeal(final CheckoutItemType checkoutItemCode, final double itemPrice) {
+		return new CheckoutItem(checkoutItemCode, itemPrice, 0.0, true);
 	}
 	
 	public CheckoutItemType getItemSku() {
@@ -41,6 +48,10 @@ public class CheckoutItem {
 		return discountPrice;
 	}
 	
+	public boolean isDealOn() {
+		return isDealOn;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
