@@ -13,7 +13,7 @@ public class VgaPriceRule implements PriceRule {
 		double totalPrice = 0.0;
 		Optional<Entry<CheckoutItem,Integer>> vgaEntry = filterByCheckoutItemType(checkoutItems, CheckoutItemType.VGA);
 		Optional<Entry<CheckoutItem,Integer>> mbpEntry = filterByCheckoutItemType(checkoutItems, CheckoutItemType.MPB);
-		if (!vgaEntry.isPresent()) {
+		if (!vgaEntry.isPresent() || !vgaEntry.get().getKey().isDealOn()) {
 			return totalPrice;
 		}
 		

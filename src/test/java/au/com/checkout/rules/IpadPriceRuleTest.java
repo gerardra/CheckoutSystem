@@ -33,7 +33,8 @@ private Map<CheckoutItem, Integer> checkoutItems;
 		checkoutItems.put(checkoutItem, 0);
 		PriceRule priceRule = new IpadPriceRule();
 		double totalPrice = priceRule.applyBusinessRules(checkoutItems);
-		Assert.assertTrue(checkoutItem.getItemPrice() * 0 == totalPrice);
+		
+		Assert.assertEquals(0.00, totalPrice, 0.0);
 	}
 
 	@Test
@@ -42,7 +43,8 @@ private Map<CheckoutItem, Integer> checkoutItems;
 		checkoutItems.put(checkoutItem, 3);
 		PriceRule priceRule = new IpadPriceRule();
 		double totalPrice = priceRule.applyBusinessRules(checkoutItems);
-		Assert.assertTrue(checkoutItem.getItemPrice() * 3 == totalPrice);
+		
+		Assert.assertEquals(1649.97, totalPrice, 0.0);
 	}
 
 	@Test
@@ -51,6 +53,7 @@ private Map<CheckoutItem, Integer> checkoutItems;
 		checkoutItems.put(checkoutItem, 5);
 		PriceRule priceRule = new IpadPriceRule();
 		double totalPrice = priceRule.applyBusinessRules(checkoutItems);
-		Assert.assertTrue(checkoutItem.getDiscountPrice() * 5 == totalPrice);
+		
+		Assert.assertEquals(2499.95, totalPrice, 0.0);
 	}
 }

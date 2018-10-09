@@ -47,7 +47,7 @@ public class CheckoutTest {
 		checkout.scanCheckoutItem(atvCheckoutItem2);
 		checkout.scanCheckoutItem(atvCheckoutItem3);
 		
-		Assert.assertTrue(230.00 == checkout.calculateTotal());
+		Assert.assertEquals(230.00, checkout.calculateTotal(), 0.0);
 	}
 
 	@Test
@@ -68,7 +68,7 @@ public class CheckoutTest {
 		checkout.scanCheckoutItem(checkoutItem4);
 		checkout.scanCheckoutItem(checkoutItem5);
 		
-		Assert.assertTrue(2700.00 == checkout.calculateTotal());
+		Assert.assertEquals(2700.00, checkout.calculateTotal(), 0.0);
 	}
 
 	@Test
@@ -80,7 +80,7 @@ public class CheckoutTest {
 		checkout.scanCheckoutItem(vga1);
 		checkout.scanCheckoutItem(ipad1);
 		
-		Assert.assertTrue(1949.99 == checkout.calculateTotal());
+		Assert.assertEquals(1949.99, checkout.calculateTotal(), 0.0);
 	}
 
 	@Test
@@ -95,7 +95,7 @@ public class CheckoutTest {
 		checkout.scanCheckoutItem(vga2);
 		checkout.scanCheckoutItem(ipad1);
 		
-		Assert.assertTrue(1880 == checkout.calculateTotal());
+		Assert.assertEquals(1880, checkout.calculateTotal(), 0.0);
 	}
 
 	@Test
@@ -112,7 +112,7 @@ public class CheckoutTest {
 		checkout.scanCheckoutItem(ipad1);
 		checkout.scanCheckoutItem(iphone);
 		
-		Assert.assertTrue(2200.00 == checkout.calculateTotal());
+		Assert.assertEquals(2200.00, checkout.calculateTotal(), 0.0);
 	}
 	
 	@Test
@@ -122,7 +122,7 @@ public class CheckoutTest {
 		checkout.scanCheckoutItem(CheckoutItem.checkoutItem(CheckoutItemType.IPH, 300.00));
 		checkout.scanCheckoutItem(CheckoutItem.checkoutItem(CheckoutItemType.IPH, 300.00));
 		
-		Assert.assertTrue(2600.00 == checkout.calculateTotal());
+		Assert.assertEquals(2600.00, checkout.calculateTotal(), 0.0);
 	}
 	
 }

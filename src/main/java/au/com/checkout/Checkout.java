@@ -3,6 +3,7 @@ package au.com.checkout;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import au.com.checkout.domain.CheckoutItem;
 import au.com.checkout.rules.PriceRule;
@@ -22,14 +23,17 @@ public class Checkout {
 	}
 	
 	public double calculateTotal() {
-		double totalAmountWithDeal = checkoutItems.entrySet().stream()
+		return calculateChekoutItemsWithDeal() + calculateChekoutItemsWithOutDeal();
+	}
+	
+	private double calculateChekoutItemsWithOutDeal() {
+		return checkoutItems.entrySet().stream()
 				.filter(checkoutItem -> !checkoutItem.getKey().isDealOn())
 				.mapToDouble(item -> item.getKey().getItemPrice() * item.getValue())
 				.sum();
-		for (PriceRule priceRule : priceRules) {
-			totalAmountWithDeal = totalAmountWithDeal + priceRule.applyBusinessRules(checkoutItems);
-		}
-		return totalAmountWithDeal;
 	}
 	
+	private double calculateChekoutItemsWithDeal() {
+		return priceRules.stream().collect(Collectors.summingDouble(priceRule -> priceRule.applyBusinessRules(checkoutItems)));
+	}
 }

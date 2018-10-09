@@ -12,7 +12,7 @@ public class IpadPriceRule implements PriceRule {
 	public double applyBusinessRules(final Map<CheckoutItem, Integer> checkoutItems) {
 		double totalPrice = 0.0;
 		final Optional<Entry<CheckoutItem, Integer>> ipadEntry = filterByCheckoutItemType(checkoutItems, CheckoutItemType.IPD);
-		if (!ipadEntry.isPresent()) {
+		if (!ipadEntry.isPresent() || !ipadEntry.get().getKey().isDealOn()) {
 			return totalPrice;
 		}
 		if (ipadEntry.get().getValue() > FOUR) {

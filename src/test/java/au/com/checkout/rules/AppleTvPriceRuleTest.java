@@ -29,56 +29,52 @@ private Map<CheckoutItem, Integer> checkoutItems;
 	
 	@Test
 	public void buy0AndGe1FreeTest() {
-		CheckoutItem checkoutItem = CheckoutItem.checkoutItem(CheckoutItemType.ATV, 109.50);
+		CheckoutItem checkoutItem = CheckoutItem.checkoutItemWithDeal(CheckoutItemType.ATV, 109.50);
 		checkoutItems.put(checkoutItem, 0);
 		PriceRule priceRule = new AppleTvPriceRule();
 		double totalPrice = priceRule.applyBusinessRules(checkoutItems);
-		Assert.assertTrue(checkoutItem.getItemPrice() * 0 == totalPrice);
-	}
-
-	@Test
-	public void buy2AndGe1FreeTest() {
-		CheckoutItem checkoutItem = CheckoutItem.checkoutItem(CheckoutItemType.ATV, 109.50);
-		checkoutItems.put(checkoutItem, 3);
-		PriceRule priceRule = new AppleTvPriceRule();
-		double totalPrice = priceRule.applyBusinessRules(checkoutItems);
-		Assert.assertTrue(checkoutItem.getItemPrice() * 2 == totalPrice);
+		
+		Assert.assertEquals(0.00, totalPrice, 0.0);
 	}
 
 	@Test
 	public void buy3AndGe1FreeTest() {
-		CheckoutItem checkoutItem = CheckoutItem.checkoutItem(CheckoutItemType.ATV, 109.50);
+		CheckoutItem checkoutItem = CheckoutItem.checkoutItemWithDeal(CheckoutItemType.ATV, 109.50);
 		checkoutItems.put(checkoutItem, 3);
 		PriceRule priceRule = new AppleTvPriceRule();
 		double totalPrice = priceRule.applyBusinessRules(checkoutItems);
-		Assert.assertTrue(checkoutItem.getItemPrice() * 2 == totalPrice);
+		
+		Assert.assertEquals(219.00, totalPrice, 0.0);
 	}
 
 	@Test
 	public void buy4AppleTv() {
-		CheckoutItem checkoutItem = CheckoutItem.checkoutItem(CheckoutItemType.ATV, 109.50);
+		CheckoutItem checkoutItem = CheckoutItem.checkoutItemWithDeal(CheckoutItemType.ATV, 109.50);
 		checkoutItems.put(checkoutItem, 4);
 		PriceRule priceRule = new AppleTvPriceRule();
 		double totalPrice = priceRule.applyBusinessRules(checkoutItems);
-		Assert.assertTrue(checkoutItem.getItemPrice() * 3 == totalPrice);
+		
+		Assert.assertEquals(328.50, totalPrice, 0.0);
 	}
 
 	@Test
 	public void buy5AppleTv() {
-		CheckoutItem checkoutItem = CheckoutItem.checkoutItem(CheckoutItemType.ATV, 109.50);
+		CheckoutItem checkoutItem = CheckoutItem.checkoutItemWithDeal(CheckoutItemType.ATV, 109.50);
 		checkoutItems.put(checkoutItem, 5);
 		PriceRule priceRule = new AppleTvPriceRule();
 		double totalPrice = priceRule.applyBusinessRules(checkoutItems);
-		Assert.assertTrue(checkoutItem.getItemPrice() * 4 == totalPrice);
+		
+		Assert.assertEquals(438.00, totalPrice, 0.0);
 	}
 
 	@Test
 	public void buy6AppleTv() {
-		CheckoutItem checkoutItem = CheckoutItem.checkoutItem(CheckoutItemType.ATV, 109.50);
+		CheckoutItem checkoutItem = CheckoutItem.checkoutItemWithDeal(CheckoutItemType.ATV, 109.50);
 		checkoutItems.put(checkoutItem, 6);
 		PriceRule priceRule = new AppleTvPriceRule();
 		double totalPrice = priceRule.applyBusinessRules(checkoutItems);
-		Assert.assertTrue(checkoutItem.getItemPrice() * 4 == totalPrice);
+		
+		Assert.assertEquals(438.00, totalPrice, 0.0);
 	}
 	
 
