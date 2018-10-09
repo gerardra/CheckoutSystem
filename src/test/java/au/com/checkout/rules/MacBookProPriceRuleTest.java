@@ -37,7 +37,7 @@ public class MacBookProPriceRuleTest {
 	public void buyOneIMacBookPro() {
 		CheckoutItem checkoutItem = CheckoutItem.checkoutItem(CheckoutItemType.MPB, 1399.99);
 		checkout.scanCheckoutItem(checkoutItem);
-		Assert.assertTrue(1399.99== checkout.calculateTotal());
+		Assert.assertEquals(1399.99, checkout.calculateTotal(), 0.0);
 	}
 
 	@Test
@@ -53,7 +53,7 @@ public class MacBookProPriceRuleTest {
 		checkout.scanCheckoutItem(checkoutItem4);
 		checkout.scanCheckoutItem(checkoutItem5);
 		
-		Assert.assertTrue(6999.95 == checkout.calculateTotal());
+		Assert.assertEquals(6999.95, checkout.calculateTotal(), 0.0);
 	}
 
 	@Test
@@ -75,7 +75,7 @@ public class MacBookProPriceRuleTest {
 		checkout.scanCheckoutItem(checkoutItem6);
 		checkout.scanCheckoutItem(checkoutItem7);
 		checkout.scanCheckoutItem(checkoutItem8);
-		Assert.assertTrue(11199.92 == checkout.calculateTotal());
+		Assert.assertEquals(11199.92, checkout.calculateTotal(), 0.0);
 	}
 
 }

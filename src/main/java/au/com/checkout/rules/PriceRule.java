@@ -14,12 +14,8 @@ public interface PriceRule {
 	
 	double applyBusinessRules(final Map<CheckoutItem, Integer> checkoutItems);
 	
-	default double calculateTotalCost(final Map.Entry<CheckoutItem, Integer> checkoutItem) {
-		double totalPrice = 0.0;
-		int noOfItems = checkoutItem.getValue();
-		double itemPrice = checkoutItem.getKey().getItemPrice();
-		totalPrice = totalPrice + (itemPrice * noOfItems);
-		return totalPrice;
+	default double calculateTotalCheckoutItemCost(final Map.Entry<CheckoutItem, Integer> checkoutItem) {
+		return checkoutItem.getKey().getItemPrice() * checkoutItem.getValue();
 	}
 	
 	default Optional<Entry<CheckoutItem, Integer>> filterByCheckoutItemType(final Map<CheckoutItem, Integer> checkoutItems, final CheckoutItemType checkoutItemType) {

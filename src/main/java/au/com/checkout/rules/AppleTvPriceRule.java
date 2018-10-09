@@ -13,11 +13,11 @@ public class AppleTvPriceRule implements PriceRule {
 	public double applyBusinessRules(final Map<CheckoutItem, Integer> checkoutItems) {
 		double totalPrice = 0.0;
 		final Optional<Entry<CheckoutItem,Integer>> atvEntry = filterByCheckoutItemType(checkoutItems, CheckoutItemType.ATV);
-		if (!atvEntry.isPresent()) {
+		if (!atvEntry.isPresent() || !atvEntry.get().getKey().isDealOn()) {
 			return totalPrice;
 		}
 		if (atvEntry.get().getValue() < THREE) {
-			totalPrice = calculateTotalCost(atvEntry.get());
+			totalPrice = calculateTotalCheckoutItemCost(atvEntry.get());
 		} else {
 			int numOfItemsAfterDeal = applyDealToGetChargableNumberOfItems(atvEntry.get().getValue()); 
 			totalPrice = atvEntry.get().getKey().getItemPrice() * numOfItemsAfterDeal;
