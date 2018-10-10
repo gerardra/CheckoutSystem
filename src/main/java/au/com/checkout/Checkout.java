@@ -1,8 +1,8 @@
 package au.com.checkout;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 import au.com.checkout.domain.CheckoutItem;
@@ -14,7 +14,7 @@ public class Checkout {
 	private final List<PriceRule> priceRules;
 	
 	public Checkout(final List<PriceRule> priceRules) {
-		 checkoutItems = new HashMap<CheckoutItem, Integer>();
+		 checkoutItems = new ConcurrentHashMap<CheckoutItem, Integer>();
 		 this.priceRules = priceRules;
 	}
 
