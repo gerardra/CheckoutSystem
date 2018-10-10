@@ -17,7 +17,7 @@ public class AppleTvPriceRule implements PriceRule {
 			return totalPrice;
 		}
 		if (atvEntry.get().getValue() < THREE) {
-			totalPrice = calculateTotalCheckoutItemCost(atvEntry.get());
+			totalPrice = atvEntry.get().getKey().getItemPrice() * atvEntry.get().getValue();
 		} else {
 			int numOfItemsAfterDeal = applyDealToGetChargableNumberOfItems(atvEntry.get().getValue()); 
 			totalPrice = atvEntry.get().getKey().getItemPrice() * numOfItemsAfterDeal;
